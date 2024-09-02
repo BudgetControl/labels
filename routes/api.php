@@ -9,3 +9,5 @@
  $app->put('/{wsid}/{label_id}', \Budgetcontrol\Label\Controller\LabelController::class . ':update');
  $app->patch('/{wsid}/{label_id}', \Budgetcontrol\Label\Controller\LabelController::class . ':patch');
  $app->delete('/{wsid}/{label_id}', \Budgetcontrol\Label\Controller\LabelController::class . ':delete');
+
+ $app->get('/monitor', \Budgetcontrol\Label\Controller\LabelController::class . ':monitor');
