@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Budgetcontrol\Label\Controller;
 
+use Budgetcontrol\Label\Entity\Order;
 use Budgetcontrol\Library\Model\Label;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -14,7 +15,14 @@ class LabelController extends Controller {
     public function list(Request $request, Response $response, $args)
     {
         $wsid = $args['wsid'];
-        $labels = Label::where('workspace_id', $wsid)->orderBy('name')->get();
+        $labels = Label::where('workspace_id', $wsid);
+
+        if(!is_null(@$request->getQueryParams()['order'])) {
+            $order = new Order($request->getQueryParams()['order']);
+            $this->orderBy($labels, $order);
+        }
+        
+        $labels = $labels->get();
 
         return response($labels->toArray());
     }
