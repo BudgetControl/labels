@@ -14,7 +14,7 @@ class LabelController extends Controller {
     public function list(Request $request, Response $response, $args)
     {
         $wsid = $args['wsid'];
-        $labels = Label::where('workspace_id', $wsid)->get();
+        $labels = Label::where('workspace_id', $wsid)->orderBy('name')->get();
 
         return response($labels->toArray());
     }
