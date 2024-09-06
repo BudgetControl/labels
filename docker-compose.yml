@@ -2,15 +2,17 @@ version: '2.2'
 
 services:
     bemodule:
-      container_name: budgetcontrol-ms-name
-      image: mlabfactory/php8-apache:v1.0
+      container_name: budgetcontrol-ms-labels
+      image: mlabfactory/php8-apache:v1.2-xdebug
       volumes:
         - ./:/var/www/workdir
       networks:
         - budgetcontrol_network
       restart: unless-stopped
+      ports:
+        - "8088:80"
 
 networks:
   budgetcontrol_network:
     external: false
-    name: budgetcontrol_network
+    name: budgetcontrol_network 
